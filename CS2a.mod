@@ -1,8 +1,12 @@
-set Shifts;
-set Grutors;
-set Students;
+param n;
+param m;
 
-param studentPrefs{Students, Shifts} binary;  # 1 if student s indicated that they'd attend grutor shift t. 0 otherwise
+set Shifts;
+set Students = {1..m};
+set Grutors = {1..n};
+
+
+param studentPrefs{Students, Shifts} integer;  # 1 if student s indicated that they'd attend grutor shift t. 0 otherwise
 param grutorPrefs{Grutors, Shifts} integer;  # integer value from 2 - 0 depending on how grutor g indicated their preference for shift t
 param grutorsPerStudent >= 0;
 param oddsOfStudentComing >= 0;
