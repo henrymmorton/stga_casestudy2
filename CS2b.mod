@@ -43,6 +43,9 @@ subject to ShiftCovered1{t in Shifts}:
 subject to ShiftCovered2{t in Shifts}:
 	sum{g in Grutors} (grutorWorking[g,t]) >= shiftCovered[t];
 
+# Make sure number of grutors working is consistent
+subject to GrutorFlow{t in Shifts}:
+	sum{g in Grutors} (grutorWorking[g,t]) = grutorsPerShift[t];
 
 # Maximum number of shifts a grutor g can take
 subject to MaxShifts{g in Grutors}:

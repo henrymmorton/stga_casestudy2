@@ -8,7 +8,7 @@ set Grutors = {1..n};
 
 param studentPrefs{Students, Shifts} integer;  # 1 if student s indicated that they'd attend grutor shift t. 0 otherwise
 param grutorPrefs{Grutors, Shifts} integer;  # integer value from 2 - 0 depending on how grutor g indicated their preference for shift t
-param grutorsPerStudent >= 0;
+param studentsPerGrutor >= 0;
 param oddsOfStudentComing >= 0;
 param maxShiftsPerGrutor >= 0;
 
@@ -37,8 +37,13 @@ subject to SPSLowerCalc{t in Shifts}:
 	
 # Calculate slack and surplus grutor help for each shift
 subject to NumGrutorsSlackSurplus{t in Shifts}:
-	grutorsPerShift[t] * grutorsPerStudent - studentDemand[t] + numGrutorsSlack[t] - numGrutorsSurplus[t] = 0;
+	grutorsPerShift[t] * studentsPerGrutor - studentDemand[t] + numGrutorsSlack[t] - numGrutorsSurplus[t] = 0;
 
+
+# Make sure number of grutors working is consistent
+subject to GrutorFlow{t in Shifts}:
+	sum{g in Grutors} (grutorWorking[g,t]) = grutorsPerShift[t];
+	
 # Calculating shiftCovered boolean value
 subject to ShiftCovered1{t in Shifts}:
 	sum{g in Grutors} (grutorWorking[g,t]) <= 99999 * shiftCovered[t];
