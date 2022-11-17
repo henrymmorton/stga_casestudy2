@@ -129,6 +129,6 @@ U1 U2 U3 U4 U5 U6 :=
 22	2	1	2	0	2	1	1	0	0	1	0	0	2	2	0	0	0	0	0	1	0	1	0	0	2	0	0	2	0	2	0	2	0	0	0	2	0
 ;
 
-param grutorsPerStudent := 6;
+param studentsPerGrutor := 6;
 param oddsOfStudentComing := 0.5;
 param maxShiftsPerGrutor := 3;
